@@ -1,6 +1,7 @@
 package wsb.nagorski.menu;
 
 import wsb.nagorski.human.Mechanic;
+import wsb.nagorski.komis.Car;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -39,7 +40,8 @@ public class MainMenu {
                 switch (choice) {
                     case 1 -> System.out.println("Baza samochodów");
                     case 2 -> System.out.println("Kup samochód");
-                    case 3 -> System.out.println("Przeglądaj bazę samochodów");
+                    case 3 -> {System.out.println("Przeglądaj bazę samochodów");
+                     Car.privateCarList();}
                     case 4 -> {
                         System.out.println("Wybrałeś opcje : Napraw pojazd");
                         System.out.println("A oto Lista dostępnych mechaników :");

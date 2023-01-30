@@ -38,7 +38,9 @@ public class Mechanic extends Human {
 
     public static void selectAndsendMechanics() {
         if (mechanics.isEmpty()) {
-            System.out.println("Nie masz aktualnie zatrudnionych zadnych mechaników");
+            hireMechanics(mechanics);
+            Mechanic.printListMechanics();
+//            System.out.println("Nie masz aktualnie zatrudnionych zadnych mechaników");
         } else {
             Mechanic.printListMechanics();
             System.out.println("Wybierz Mechanika");
