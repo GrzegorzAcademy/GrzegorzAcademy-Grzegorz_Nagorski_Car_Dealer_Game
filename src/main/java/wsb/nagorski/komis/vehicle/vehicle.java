@@ -1,6 +1,16 @@
-package wsb.nagorski.komis;
+package wsb.nagorski.komis.vehicle;
+
+import wsb.nagorski.komis.Color;
+import wsb.nagorski.komis.Demage;
+import wsb.nagorski.komis.Segment;
 
 public abstract class vehicle {
+    private int id;
+
+    public void setId(int id) {
+        this.id = id++;
+    }
+
     private Double value;
     private String brand;
     private String model;
@@ -63,8 +73,7 @@ public abstract class vehicle {
         this.segment = segment;
     }
 
-    public vehicle(Double value, String model, String brand, Double millage, Color color, Segment segment, Demage demage) {
-        super();
+    public vehicle( Double value, String model, String brand, Double millage, Color color, Segment segment, Demage demage) {
         this.value = value;
         this.brand = brand;
         this.model = model;
@@ -81,5 +90,8 @@ public abstract class vehicle {
         this.millage = millage;
         this.color = color;
 
+    }
+
+    public vehicle() {
     }
 }

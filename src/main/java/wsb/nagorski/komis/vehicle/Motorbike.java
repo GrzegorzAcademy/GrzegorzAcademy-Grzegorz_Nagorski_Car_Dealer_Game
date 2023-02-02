@@ -1,6 +1,8 @@
-package wsb.nagorski.komis;
+package wsb.nagorski.komis.vehicle;
 
-public class Motorbike extends vehicle{
+import wsb.nagorski.komis.Color;
+
+public class Motorbike extends vehicle {
     public Motorbike(Double value, String brand, String model, Double millage, Color color) {
         super(value, brand,model, millage, color);
     }
@@ -12,7 +14,6 @@ public class Motorbike extends vehicle{
 
     @Override
     void repair() {
-
     }
 
     @Override

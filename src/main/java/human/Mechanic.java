@@ -1,4 +1,4 @@
-package wsb.nagorski.human;
+package human;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -29,31 +29,27 @@ public class Mechanic extends Human {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Mechanik nr : ").append(id)
-                .append(" imię : ").append(name)
-                .append(", nazwisko : ").append(lastName).
+                .append(" imię : ").append(getName())
+                .append(", nazwisko : ").append(getLastName()).
                 append(", skuteczność ").append(effectiveness)
                 .append(" %");
         return sb.toString();
     }
 
     public static void selectAndsendMechanics() {
-        if (mechanics.isEmpty()) {
-            hireMechanics(mechanics);
-            Mechanic.printListMechanics();
-//            System.out.println("Nie masz aktualnie zatrudnionych zadnych mechaników");
-        } else {
-            Mechanic.printListMechanics();
-            System.out.println("Wybierz Mechanika");
-            int numberOfMechanik = sc.nextInt();
-            if (numberOfMechanik - 1 > mechanics.size())
-                System.out.println("przykro nam ale nia mechanika o takim numerze");
-            else
-                System.out.println("Wybrałeś mechanika nr "
-                        + numberOfMechanik + " " + mechanics.get(numberOfMechanik - 1).toString());
-        }
+        Mechanic.printListMechanics();
+        System.out.println("Wybierz Mechanika");
+        int numberOfMechanik = sc.nextInt();
+        if (numberOfMechanik - 1 >= mechanics.size())
+            System.out.println("przykro nam ale nia mechanika o numerze :" + numberOfMechanik);
+        else
+            System.out.println("Wybrałeś mechanika nr "
+                    + numberOfMechanik + " " + mechanics.get(numberOfMechanik).toString());
+
     }
 
-    private static void hireMechanics(List<Mechanic> mechanics) {
+
+    public static void addMechanicToComapny() {
         mechanics.add(new Mechanic(1, "Janusz", "Kowalski", 100));
         mechanics.add(new Mechanic(2, "Marian", "Kowalski", 90));
         mechanics.add(new Mechanic(3, "Adrian", "Kowalski", 80));
@@ -69,7 +65,7 @@ public class Mechanic extends Human {
     public static void hireMechanicsToCarRepair() {
         System.out.println("Zafrudnij mechaników");
         String line = sc.nextLine();
-        Mechanic.hireMechanics(mechanics);
+        Mechanic.printListMechanics();
         sc.nextLine();
     }
 }

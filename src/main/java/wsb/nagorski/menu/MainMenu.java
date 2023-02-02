@@ -1,7 +1,9 @@
 package wsb.nagorski.menu;
 
-import wsb.nagorski.human.Mechanic;
-import wsb.nagorski.komis.Car;
+import human.Mechanic;
+import wsb.nagorski.advertisingAgency.Advertisement;
+import wsb.nagorski.komis.vehicle.Car;
+
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -24,13 +26,14 @@ public class MainMenu {
         System.out.println(" 9 - Sprawdz historię transakcji");
         System.out.println(" 10 - Sprawdz historię naprawy każdego pojazdu");
         System.out.println(" 11 - sprawdz sumę kosztów napraw i mycia dla każdego z posiadanych pojazdów");
-        System.out.println(" 12 - zatrudnij mechaników");
+        System.out.println(" 12 - uzupełnij baze danych");
         System.out.println(" 0 - wyjście z gry");
 
     }
 
 
     public static void run() {
+        Car car = new Car();
 
         do {
             printMenu();
@@ -38,25 +41,35 @@ public class MainMenu {
                 choice = sc.nextInt();
                 sc.nextLine();
                 switch (choice) {
-                    case 1 -> System.out.println("Baza samochodów");
+                    case 1 -> {
+                        System.out.println("Baza samochodów Do kupienia : ");
+                        Car.listOfCarsToBuy();
+                    }
                     case 2 -> System.out.println("Kup samochód");
-                    case 3 -> {System.out.println("Przeglądaj bazę samochodów");
-                     Car.privateCarList();}
+                    case 3 -> {
+                        System.out.println("Przeglądaj bazę samochodów");
+                        car.showCarDataBase();
+                    }
                     case 4 -> {
                         System.out.println("Wybrałeś opcje : Napraw pojazd");
                         System.out.println("A oto Lista dostępnych mechaników :");
                         System.out.println("Wybierz mądrze !!");
                         Mechanic.selectAndsendMechanics();
-
                     }
                     case 5 -> System.out.println("Przejzyj potencjalncyh klientów");
                     case 6 -> System.out.println("sprzedaj samochód potencjalnemu klientowi");
-                    case 7 -> System.out.println("Kup reklamę");
+                    case 7 -> {
+                        Advertisement.byAdvertising();
+                        System.out.println("wciśnij zero by wrócic do menu : ");
+                    }
                     case 8 -> System.out.println("sprawdz stan konta");
                     case 9 -> System.out.println("sprawdz historie transkacji");
                     case 10 -> System.out.println("sprawdz historię naprawy każdego pojazdu");
                     case 11 -> System.out.println("suma kosztów napraw kazdego pojazdu");
-                    case 12 -> Mechanic.hireMechanicsToCarRepair();
+                    case 12 -> {
+                        Car.addCarToMap();
+                        Mechanic.addMechanicToComapny();
+                    }
                     default -> System.out.println("Zły wybór, spróbuj jeszcze raz");
                 }
             } catch (InputMismatchException | NumberFormatException e) {

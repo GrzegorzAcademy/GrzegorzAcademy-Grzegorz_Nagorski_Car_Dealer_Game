@@ -1,10 +1,10 @@
-package wsb.nagorski.human;
+package human;
 
 public abstract class Human {
 
-    String name;
-    String lastName;
-
+    private String name;
+    private String lastName;
+    private Double cash;
     public String getName() {
         return name;
     }
@@ -18,6 +18,11 @@ public abstract class Human {
     }
 
     public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public Human(String name, String lastName, Double cash) {
+        this.name = name;
         this.lastName = lastName;
     }
 

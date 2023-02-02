@@ -1,4 +1,9 @@
-package wsb.nagorski.komis;
+package wsb.nagorski.komis.vehicle;
+
+import wsb.nagorski.komis.Color;
+import wsb.nagorski.komis.Demage;
+import wsb.nagorski.komis.Segment;
+import wsb.nagorski.komis.vehicle.vehicle;
 
 public class Truck extends vehicle {
     String cargoSpace;
