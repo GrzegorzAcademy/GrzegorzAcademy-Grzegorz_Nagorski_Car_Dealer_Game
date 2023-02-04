@@ -1,16 +1,21 @@
 package wsb.nagorski.menu;
 
-import human.Mechanic;
+import wsb.nagorski.human.Client;
+import wsb.nagorski.human.Mechanic;
 import wsb.nagorski.advertisingAgency.Advertisement;
+import wsb.nagorski.human.Player;
 import wsb.nagorski.komis.vehicle.Car;
-
+import wsb.nagorski.komis.vehicle.Database;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import static wsb.nagorski.komis.vehicle.Database.addCarToMap;
+
 public class MainMenu {
 
     static Scanner sc = new Scanner(System.in);
+
     static Integer choice = 13;
 
     private static void printMenu() {
@@ -34,6 +39,8 @@ public class MainMenu {
 
     public static void run() {
         Car car = new Car();
+        Client client = new Client();
+        Player player = new Player();
 
         do {
             printMenu();
@@ -48,7 +55,7 @@ public class MainMenu {
                     case 2 -> System.out.println("Kup samochód");
                     case 3 -> {
                         System.out.println("Przeglądaj bazę samochodów");
-                        car.showCarDataBase();
+                        Database.showCarDataBase();
                     }
                     case 4 -> {
                         System.out.println("Wybrałeś opcje : Napraw pojazd");
@@ -56,8 +63,14 @@ public class MainMenu {
                         System.out.println("Wybierz mądrze !!");
                         Mechanic.selectAndsendMechanics();
                     }
-                    case 5 -> System.out.println("Przejzyj potencjalncyh klientów");
-                    case 6 -> System.out.println("sprzedaj samochód potencjalnemu klientowi");
+                    case 5 -> {
+                        System.out.println("Przejzyj potencjalncyh klientów");
+                        client.defaultListClient();
+                    }
+                    case 6 -> {
+                        System.out.println("sprzedaj samochód potencjalnemu klientowi");
+                    car.sell(player,client);
+                    }
                     case 7 -> {
                         Advertisement.byAdvertising();
                         System.out.println("wciśnij zero by wrócic do menu : ");
@@ -67,8 +80,9 @@ public class MainMenu {
                     case 10 -> System.out.println("sprawdz historię naprawy każdego pojazdu");
                     case 11 -> System.out.println("suma kosztów napraw kazdego pojazdu");
                     case 12 -> {
-                        Car.addCarToMap();
+                       addCarToMap();
                         Mechanic.addMechanicToComapny();
+                        client.addClientToList();
                     }
                     default -> System.out.println("Zły wybór, spróbuj jeszcze raz");
                 }
@@ -80,6 +94,7 @@ public class MainMenu {
         while (choice != 0);
         {
             System.out.println("Bay Bay");
+            sc.close();
         }
     }
 

@@ -1,6 +1,10 @@
 package wsb.nagorski.komis.vehicle;
 
+import wsb.nagorski.human.Client;
+import wsb.nagorski.human.Player;
 import wsb.nagorski.komis.Color;
+
+import java.util.List;
 
 public class Motorbike extends vehicle {
     public Motorbike(Double value, String brand, String model, Double millage, Color color) {
@@ -8,7 +12,8 @@ public class Motorbike extends vehicle {
     }
 
     @Override
-    void sell() {
+    void sell(Player player, Client client) {
+
 
     }
 

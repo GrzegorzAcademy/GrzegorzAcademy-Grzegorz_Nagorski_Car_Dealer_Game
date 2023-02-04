@@ -1,4 +1,4 @@
-package human;
+package wsb.nagorski.human;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -49,11 +49,14 @@ public class Mechanic extends Human {
     }
 
 
-    public static void addMechanicToComapny() {
+    static void addMechanicToComapnySet() {
         mechanics.add(new Mechanic(1, "Janusz", "Kowalski", 100));
         mechanics.add(new Mechanic(2, "Marian", "Kowalski", 90));
         mechanics.add(new Mechanic(3, "Adrian", "Kowalski", 80));
 
+    }
+    public static void addMechanicToComapny() {
+    addMechanicToComapnySet();
     }
 
     public static void printListMechanics() {

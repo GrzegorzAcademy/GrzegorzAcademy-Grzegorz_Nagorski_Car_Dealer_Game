@@ -1,5 +1,7 @@
 package wsb.nagorski.komis.vehicle;
 
+import wsb.nagorski.human.Client;
+import wsb.nagorski.human.Player;
 import wsb.nagorski.komis.Color;
 import wsb.nagorski.komis.Demage;
 import wsb.nagorski.komis.Segment;
@@ -7,8 +9,8 @@ import wsb.nagorski.komis.Segment;
 public abstract class vehicle {
     private int id;
 
-    public void setId(int id) {
-        this.id = id++;
+    public int getId() {
+        return id;
     }
 
     private Double value;
@@ -18,8 +20,10 @@ public abstract class vehicle {
     Color color;
     Segment segment;
     Demage demage;
+    Player player;
 
-    abstract void sell();
+    abstract void sell(Player player, Client client);
+
 
     abstract void repair();
 
@@ -73,7 +77,8 @@ public abstract class vehicle {
         this.segment = segment;
     }
 
-    public vehicle( Double value, String model, String brand, Double millage, Color color, Segment segment, Demage demage) {
+    public vehicle(int id, Double value, String brand, String model, Double millage, Color color, Segment segment, Demage demage) {
+        this.id=id;
         this.value = value;
         this.brand = brand;
         this.model = model;
