@@ -5,6 +5,7 @@ import wsb.nagorski.human.Player;
 import wsb.nagorski.komis.Color;
 import wsb.nagorski.komis.Demage;
 import wsb.nagorski.komis.Segment;
+import wsb.nagorski.menu.MainMenu;
 
 import java.util.*;
 
@@ -12,26 +13,27 @@ public class Car extends vehicle {
     static Scanner scanner = new Scanner(System.in);
     Client client;
     Demage demage;
-Database database;
+    Database database;
     static Random random = new Random();
     public static List<Car> carlist = new LinkedList<>();
-    public static Set<Car> listCarToBay = new HashSet<>();
-    public static Set<Car> listCarClient = new HashSet<>();
+    public static ArrayList<Car> listCarToBay = new ArrayList<>();
 
 
-    public static void listOfCarsToBuy() {
-        for (int i = 0; i <= 2; i++) {
-            int randomNumber = random.ints(1, carlist.size()).findFirst().getAsInt();
-            Car car = carlist.get(randomNumber);
-            Car car1 = carlist.get(randomNumber);
-            listCarToBay.add(car1);
-        }
-        for (Car car : listCarToBay) {
-            System.out.println(car.toString());
-            System.out.println("------------------------------------------------------------------------------" +
-                    "---------------------------------------");
+    public static void menuBuyCar() {
 
-        }
+        int choce;
+        do {
+            listMenuBuyCar();
+            choce = scanner.nextInt();
+            switch (choce) {
+                case 1 -> writeListCarToBay();
+//                case 2 -> ;
+                case 0 -> System.out.println("powrót do manin menu");
+
+            }
+        } while (choce != 0);
+
+        MainMenu.run();
     }
 
     public Car(int id, Double value, String model, String brand, Double millage, Color color,
@@ -41,18 +43,30 @@ Database database;
         Database.id++;
     }
 
-    @Override
-    public void sell(Player player, Client client) {
+
+    public void buyCarToComis2() {
+        List<Player> listPlayer = new LinkedList<>();
+        listPlayer.add(new Player("Karol", "Kołodziej", 1_000_000.0));
+        System.out.println(listPlayer.get(0));
+        Double cash = listPlayer.get(0).getCash();
+
         System.out.println("podaj numer pojazdu który chcesz kupić : ");
         int numberCar = scanner.nextInt();
         {
-            if (carlist.get(numberCar).getValue() > player.getCash()) {
+            if (listCarToBay.get(numberCar).getValue() > cash) {
                 System.out.println("niestety nie masz mieniędzy na to auto. Zacznij wiećej pracować.");
             } else {
-                listCarClient.add(carlist.get(numberCar));
-                carlist.remove(carlist.get(numberCar));
+                carlist.add(listCarToBay.get(numberCar));
+                double v = cash + listCarToBay.get(numberCar).getValue();
+                listCarToBay.remove(carlist.get(numberCar));
             }
+            System.out.println(listPlayer.get(0).toString());
         }
+
+    }
+
+    @Override
+    void buyCarToComis(Player player, Client client) {
 
     }
 
@@ -64,7 +78,7 @@ Database database;
     @Override
     public void showCarDataBase() {
         for (int i = 0; i < carlist.size(); i++) {
-//            Car car = carlist.get(i);
+            Car car = carlist.get(i);
             System.out.println(carlist.toString());
             System.out.println("------------------------------------------------------------------------------" +
                     "---------------------------------------");
@@ -88,5 +102,19 @@ Database database;
     }
 
     public Car() {
+    }
+
+    static void writeListCarToBay() {
+        for (int i = 0; i < 3; i++) {
+
+            System.out.println(listCarToBay.get(random.nextInt(listCarToBay.size())));
+        }
+    }
+
+    static void listMenuBuyCar() {
+        System.out.println("Wybrałęś opcję przeglądaj samocgody do kupienia : ");
+        System.out.println(" 1 : przeglądaj bazę dostęonych pojazdów");
+        System.out.println(" 2 : kup pojazd");
+        System.out.println(" 0 : powrót do manin menu");
     }
 }

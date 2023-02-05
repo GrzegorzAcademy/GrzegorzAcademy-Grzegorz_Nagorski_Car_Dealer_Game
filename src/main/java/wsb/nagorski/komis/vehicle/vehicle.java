@@ -22,7 +22,7 @@ public abstract class vehicle {
     Demage demage;
     Player player;
 
-    abstract void sell(Player player, Client client);
+    abstract void buyCarToComis(Player player, Client client);
 
 
     abstract void repair();

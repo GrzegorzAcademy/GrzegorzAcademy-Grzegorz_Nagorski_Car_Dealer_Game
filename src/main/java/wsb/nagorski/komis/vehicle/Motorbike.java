@@ -12,7 +12,7 @@ public class Motorbike extends vehicle {
     }
 
     @Override
-    void sell(Player player, Client client) {
+    void buyCarToComis(Player player, Client client) {
 
 
     }

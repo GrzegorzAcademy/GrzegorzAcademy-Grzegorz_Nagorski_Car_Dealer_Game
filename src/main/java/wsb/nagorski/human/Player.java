@@ -1,8 +1,15 @@
 package wsb.nagorski.human;
 
-public class Player extends Human {
+import java.util.LinkedList;
+import java.util.List;
 
-//    Player player = new Player("Karol", "Kolodziej", 1_000_000.0);
+public class Player extends Human {
+    public static List<Player> listPlayer = new LinkedList<>();
+
+
+    public static void addPlayerToList() {
+        listPlayer.add(new Player("Karol", "Kołodziej", 1_000_000.0));
+    }
 
     public Player(String name, String lastName, Double cash) {
         super(name, lastName, cash);
