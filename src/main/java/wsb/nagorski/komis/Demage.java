@@ -11,12 +11,6 @@ public enum Demage {
     NONE("BEZ USZKODZEŃ",0);
 
 
-//        demageList.add(new Demage("breaks", 10));
-//        damageList.add(new Demage("suspension", 20));
-//        demageList.add(new Demage("engine", 100));
-//        demageList.add(new Demage("body", 50));
-//        demageList.add(new Demage("gearbox", 50));
-
 
     Demage(String demage, Integer value) {
         this.demage = demage;

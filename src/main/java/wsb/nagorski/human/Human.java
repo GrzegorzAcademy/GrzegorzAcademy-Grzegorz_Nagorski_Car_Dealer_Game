@@ -1,5 +1,7 @@
 package wsb.nagorski.human;
 
+import java.util.Objects;
+
 public abstract class Human {
 
     private String name;
@@ -51,5 +53,18 @@ public abstract class Human {
                 append(" Nazwisko : ").append(lastName).
                 append(", Stan konta : ").append(cash);
         return sb.toString();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Human human = (Human) o;
+        return Objects.equals(name, human.name) && Objects.equals(lastName, human.lastName) && Objects.equals(cash, human.cash);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, lastName, cash);
     }
 }

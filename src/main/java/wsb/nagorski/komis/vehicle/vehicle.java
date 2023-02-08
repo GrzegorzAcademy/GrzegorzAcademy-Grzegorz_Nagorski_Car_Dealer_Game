@@ -20,10 +20,12 @@ public abstract class vehicle {
     Color color;
     Segment segment;
     Demage demage;
-    Player player;
+
 
     abstract void buyCarToComis(Player player, Client client);
 
+
+    public abstract void buyCarToComis();
 
     abstract void repair();
 

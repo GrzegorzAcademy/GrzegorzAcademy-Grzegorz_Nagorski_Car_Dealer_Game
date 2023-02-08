@@ -20,6 +20,11 @@ public class Truck extends vehicle {
     }
 
     @Override
+    public void buyCarToComis() {
+
+    }
+
+    @Override
     void repair() {
 
     }

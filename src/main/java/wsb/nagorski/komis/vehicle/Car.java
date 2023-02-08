@@ -11,29 +11,44 @@ import java.util.*;
 
 public class Car extends vehicle {
     static Scanner scanner = new Scanner(System.in);
-    Client client;
+
+    Player player = new Player("Karol", "Kołodziejczyk", 1_000000.0);
     Demage demage;
-    Database database;
     static Random random = new Random();
-    public static List<Car> carlist = new LinkedList<>();
-    public static ArrayList<Car> listCarToBay = new ArrayList<>();
+    public static ArrayList<Car> carListDatabase = new ArrayList<>();
+    static List<Car> listCarToBuy = new ArrayList<>();
+    static List<Car> ownedCars = new LinkedList<>();
 
 
-    public static void menuBuyCar() {
-
-        int choce;
+    public void menuBuyCar() {
+        int choice;
         do {
             listMenuBuyCar();
-            choce = scanner.nextInt();
-            switch (choce) {
-                case 1 -> writeListCarToBay();
-//                case 2 -> ;
+            choice = scanner.nextInt();
+            switch (choice) {
+                case 1 -> Car.showListCarToBuy();
+                case 2 -> buyCarToComisSTatic();
                 case 0 -> System.out.println("powrót do manin menu");
 
             }
-        } while (choce != 0);
+        } while (choice != 0);
 
         MainMenu.run();
+    }
+
+    private void buyCarToComisSTatic() {
+        System.out.println("podaj numer pojazdu który chcesz kupić : ");
+        int numberCar = scanner.nextInt() - 1;
+        {
+            if (listCarToBuy.get(numberCar).getValue() > player.getCash()) {
+                System.out.println("niestety nie masz mieniędzy na to auto. Zacznij wiecej pracować.");
+            } else {
+                ownedCars.add(listCarToBuy.get(numberCar));
+                System.out.println("kupiłeś" + listCarToBuy.get(numberCar).toString());
+                player.setCash(player.getCash() - carListDatabase.get(numberCar).getValue());
+                deletaCArToDatabase(numberCar);
+            }
+        }
     }
 
     public Car(int id, Double value, String model, String brand, Double millage, Color color,
@@ -43,31 +58,18 @@ public class Car extends vehicle {
         Database.id++;
     }
 
-
-    public void buyCarToComis2() {
-        List<Player> listPlayer = new LinkedList<>();
-        listPlayer.add(new Player("Karol", "Kołodziej", 1_000_000.0));
-        System.out.println(listPlayer.get(0));
-        Double cash = listPlayer.get(0).getCash();
-
-        System.out.println("podaj numer pojazdu który chcesz kupić : ");
-        int numberCar = scanner.nextInt();
-        {
-            if (listCarToBay.get(numberCar).getValue() > cash) {
-                System.out.println("niestety nie masz mieniędzy na to auto. Zacznij wiećej pracować.");
-            } else {
-                carlist.add(listCarToBay.get(numberCar));
-                double v = cash + listCarToBay.get(numberCar).getValue();
-                listCarToBay.remove(carlist.get(numberCar));
-            }
-            System.out.println(listPlayer.get(0).toString());
-        }
+    @Override
+    void buyCarToComis(Player player, Client client) {
 
     }
 
     @Override
-    void buyCarToComis(Player player, Client client) {
+    public void buyCarToComis() {
+    }
 
+    private static void deletaCArToDatabase(int numberCar) {
+        Integer id = carListDatabase.get(numberCar).getId();
+        carListDatabase.removeIf(car -> id.equals(numberCar));
     }
 
     @Override
@@ -75,16 +77,22 @@ public class Car extends vehicle {
 
     }
 
-    @Override
-    public void showCarDataBase() {
-        for (int i = 0; i < carlist.size(); i++) {
-            Car car = carlist.get(i);
-            System.out.println(carlist.toString());
+    public static void listOfOwnedCars() {
+        for (Car car : ownedCars) {
+            System.out.println(car.toString());
             System.out.println("------------------------------------------------------------------------------" +
                     "---------------------------------------");
 
         }
+    }
 
+    @Override
+    public void showCarDataBase() {
+        for (Car car : carListDatabase) {
+            System.out.println(car.toString());
+            System.out.println("------------------------------------------------------------------------------" +
+                    "---------------------------------------");
+        }
     }
 
     @Override
@@ -97,24 +105,32 @@ public class Car extends vehicle {
                 .append(", Kolor : ").append(getColor())
                 .append(", Segment : ").append(getSegment())
                 .append(", Uszkodzenia : ").append(demage.toString());
-
         return sb.toString();
     }
 
     public Car() {
     }
 
-    static void writeListCarToBay() {
+   public static void addCarToListToBay() {
         for (int i = 0; i < 3; i++) {
+            listCarToBuy.add(carListDatabase.get(random.nextInt(carListDatabase.size())));
+//            Car car = listCarToBuy.get(i);
+//            System.out.println(car.toString());
 
-            System.out.println(listCarToBay.get(random.nextInt(listCarToBay.size())));
         }
     }
+
+    public static void showListCarToBuy() {
+        for (Car car : listCarToBuy) {
+            System.out.println(car.toString());
+        }
+    }
+
 
     static void listMenuBuyCar() {
         System.out.println("Wybrałęś opcję przeglądaj samocgody do kupienia : ");
         System.out.println(" 1 : przeglądaj bazę dostęonych pojazdów");
-        System.out.println(" 2 : kup pojazd");
+        System.out.println(" 2 : KUP POJAZD");
         System.out.println(" 0 : powrót do manin menu");
     }
 }

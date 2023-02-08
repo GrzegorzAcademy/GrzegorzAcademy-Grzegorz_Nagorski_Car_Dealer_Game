@@ -3,16 +3,18 @@ package wsb.nagorski.menu;
 import wsb.nagorski.advertisingAgency.Advertisement;
 import wsb.nagorski.human.Client;
 import wsb.nagorski.human.Mechanic;
-import wsb.nagorski.human.Player;
+
 import wsb.nagorski.komis.vehicle.Car;
 import wsb.nagorski.komis.vehicle.Database;
 
-import java.util.ArrayList;
+
 import java.util.InputMismatchException;
+
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
-import static wsb.nagorski.komis.vehicle.Database.addingOwnedCarsToTheCollection;
+
 
 public class MainMenu {
 
@@ -23,7 +25,7 @@ public class MainMenu {
     private static void printMenu() {
 
         System.out.println(" 1 - Przeglądaj bazę samochodów do kupienia");
-        System.out.println(" 2-  Kup samochód ");
+        System.out.println(" 2-  baza aut");
         System.out.println(" 3 - Przeglądaj bazę posiadanych samochdów");
         System.out.println(" 4 - Napraw samochód");
         System.out.println(" 5 - Przejrzyj potencjalnych klientów");
@@ -40,15 +42,13 @@ public class MainMenu {
 
     public static void run() {
         Car car = new Car();
+       List<Car> carlist = new LinkedList<>();
         Client client = new Client();
-        Player player = new Player();
-        addingOwnedCarsToTheCollection();
+        Database.addingOwnedCarsToTheCollection();
         Mechanic.addMechanicToComapny();
         client.addClientToList();
-        Player.addPlayerToList();
-        Database.databaseCar();
-        List<Player> listPlayers = new ArrayList<>();
-
+        Database.addCarToDatabaseCar();
+        Car.addCarToListToBay();
         do {
             printMenu();
             try {
@@ -57,12 +57,15 @@ public class MainMenu {
                 switch (choice) {
                     case 1 -> {
                         System.out.println("Baza samochodów Do kupienia : ");
-                        Car.menuBuyCar();
+                        car.menuBuyCar();
                     }
-                    case 2 -> System.out.println("Kup samochód");
+                    case 2 -> {
+                        System.out.println("baza aut ");
+                    car.showCarDataBase();
+                    }
                     case 3 -> {
                         System.out.println("Baza samochodów : ");
-                        Database.listOfOwnedCars();
+                        Car.listOfOwnedCars();
                     }
                     case 4 -> {
                         System.out.println("Wybrałeś opcje : Napraw pojazd");
@@ -76,7 +79,7 @@ public class MainMenu {
                     }
                     case 6 -> {
                         System.out.println("sprzedaj samochód :");
-                        car.buyCarToComis2();
+//                        car.buyCarToComis();
                     }
                     case 7 -> {
                         Advertisement.byAdvertising();
