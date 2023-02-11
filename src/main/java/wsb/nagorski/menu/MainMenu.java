@@ -3,17 +3,11 @@ package wsb.nagorski.menu;
 import wsb.nagorski.advertisingAgency.Advertisement;
 import wsb.nagorski.human.Client;
 import wsb.nagorski.human.Mechanic;
-
 import wsb.nagorski.komis.vehicle.Car;
 import wsb.nagorski.komis.vehicle.Database;
 
-
 import java.util.InputMismatchException;
-
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Scanner;
-
 
 
 public class MainMenu {
@@ -25,7 +19,7 @@ public class MainMenu {
     private static void printMenu() {
 
         System.out.println(" 1 - Przeglądaj bazę samochodów do kupienia");
-        System.out.println(" 2-  baza aut");
+        System.out.println(" 2- baza aut");
         System.out.println(" 3 - Przeglądaj bazę posiadanych samochdów");
         System.out.println(" 4 - Napraw samochód");
         System.out.println(" 5 - Przejrzyj potencjalnych klientów");
@@ -35,6 +29,7 @@ public class MainMenu {
         System.out.println(" 9 - Sprawdz historię transakcji");
         System.out.println(" 10 - Sprawdz historię naprawy każdego pojazdu");
         System.out.println(" 11 - sprawdz sumę kosztów napraw i mycia dla każdego z posiadanych pojazdów");
+        System.out.println(" 12 - załąduj bazę danych");
         System.out.println(" 0 - wyjście z gry");
 
     }
@@ -42,13 +37,7 @@ public class MainMenu {
 
     public static void run() {
         Car car = new Car();
-       List<Car> carlist = new LinkedList<>();
         Client client = new Client();
-        Database.addingOwnedCarsToTheCollection();
-        Mechanic.addMechanicToComapny();
-        client.addClientToList();
-        Database.addCarToDatabaseCar();
-        Car.addCarToListToBay();
         do {
             printMenu();
             try {
@@ -61,7 +50,7 @@ public class MainMenu {
                     }
                     case 2 -> {
                         System.out.println("baza aut ");
-                    car.showCarDataBase();
+                        car.showCarDataBase();
                     }
                     case 3 -> {
                         System.out.println("Baza samochodów : ");
@@ -86,10 +75,18 @@ public class MainMenu {
                         System.out.println("wciśnij zero by wrócic do menu : ");
                     }
                     case 8 -> System.out.println("sprawdz stan konta");
+
                     case 9 -> System.out.println("sprawdz historie transkacji");
                     case 10 -> System.out.println("sprawdz historię naprawy każdego pojazdu");
                     case 11 -> System.out.println("suma kosztów napraw kazdego pojazdu");
-
+                    case 12 -> {
+                        System.out.println("załaduj bazę danych");
+                        Database.addingOwnedCarsToTheCollection();
+                        Mechanic.addMechanicToComapny();
+                        client.addClientToList();
+                        Database.addCarToDatabaseCar();
+                        Car.addCarToListToBay();
+                    }
                     default -> System.out.println("Zły wybór, spróbuj jeszcze raz");
                 }
             } catch (InputMismatchException | NumberFormatException e) {

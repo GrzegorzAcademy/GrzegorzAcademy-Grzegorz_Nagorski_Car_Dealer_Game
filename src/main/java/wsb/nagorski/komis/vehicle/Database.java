@@ -12,7 +12,7 @@ public class Database {
     public static int id = 1;
 
     public static void addingOwnedCarsToTheCollection() {
-        ownedCars.add(new Car(id, 55000.0, "BMW", "118", 168000.0, Color.BLACK,
+        ownedCars.add(new Car(id, 55000.0, "BMW", "118", 168000.0, Color.YELLOW,
                 Segment.STANDARD, Demage.BODY));
 
         ownedCars.add(new Car(id, 150000.0, "BMW", "318", 1680.0, Color.RED,

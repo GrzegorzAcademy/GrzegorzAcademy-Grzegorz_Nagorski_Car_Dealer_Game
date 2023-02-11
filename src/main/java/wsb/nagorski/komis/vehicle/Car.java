@@ -47,6 +47,8 @@ public class Car extends vehicle {
                 System.out.println("kupiłeś" + listCarToBuy.get(numberCar).toString());
                 player.setCash(player.getCash() - carListDatabase.get(numberCar).getValue());
                 deletaCArToDatabase(numberCar);
+                listCarToBuy.clear();
+                addCarToListToBay();
             }
         }
     }
@@ -68,8 +70,9 @@ public class Car extends vehicle {
     }
 
     private static void deletaCArToDatabase(int numberCar) {
-        Integer id = carListDatabase.get(numberCar).getId();
-        carListDatabase.removeIf(car -> id.equals(numberCar));
+        System.out.println(carListDatabase.size());
+        carListDatabase.remove(carListDatabase.get(numberCar).getId());
+        System.out.println(carListDatabase.size());
     }
 
     @Override
@@ -111,7 +114,7 @@ public class Car extends vehicle {
     public Car() {
     }
 
-   public static void addCarToListToBay() {
+    public static void addCarToListToBay() {
         for (int i = 0; i < 3; i++) {
             listCarToBuy.add(carListDatabase.get(random.nextInt(carListDatabase.size())));
 //            Car car = listCarToBuy.get(i);
