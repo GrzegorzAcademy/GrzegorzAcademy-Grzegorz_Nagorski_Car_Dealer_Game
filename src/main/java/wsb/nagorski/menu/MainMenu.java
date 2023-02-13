@@ -81,10 +81,11 @@ public class MainMenu {
                     case 11 -> System.out.println("suma kosztów napraw kazdego pojazdu");
                     case 12 -> {
                         System.out.println("załaduj bazę danych");
+                        Database.addCarToDatabaseCar();
                         Database.addingOwnedCarsToTheCollection();
                         Mechanic.addMechanicToComapny();
                         client.addClientToList();
-                        Database.addCarToDatabaseCar();
+
                         Car.addCarToListToBay();
                     }
                     default -> System.out.println("Zły wybór, spróbuj jeszcze raz");

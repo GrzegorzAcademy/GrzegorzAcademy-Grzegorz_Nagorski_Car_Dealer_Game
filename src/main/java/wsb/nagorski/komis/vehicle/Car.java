@@ -17,7 +17,7 @@ public class Car extends vehicle {
     static Random random = new Random();
     public static ArrayList<Car> carListDatabase = new ArrayList<>();
     static List<Car> listCarToBuy = new ArrayList<>();
-    static List<Car> ownedCars = new LinkedList<>();
+    static List<Car> ownedCars = new ArrayList<>();
 
 
     public void menuBuyCar() {
@@ -37,22 +37,29 @@ public class Car extends vehicle {
     }
 
     private void buyCarToComisSTatic() {
-        System.out.println("podaj numer pojazdu który chcesz kupić : ");
-        int numberCar = scanner.nextInt() - 1;
-        {
-            if (listCarToBuy.get(numberCar).getValue() > player.getCash()) {
-                System.out.println("niestety nie masz mieniędzy na to auto. Zacznij wiecej pracować.");
-            } else {
-                ownedCars.add(listCarToBuy.get(numberCar));
-                System.out.println("kupiłeś" + listCarToBuy.get(numberCar).toString());
-                player.setCash(player.getCash() - carListDatabase.get(numberCar).getValue());
-                deletaCArToDatabase(numberCar);
-                listCarToBuy.clear();
-                addCarToListToBay();
-            }
-        }
+        System.out.println("podaj ID pojazdu, który chcesz kupić");
+        int numberCar = scanner.nextInt();
+//        System.out.println(searchCarByID(numberCar));
+//        if (listCarToBuy.get(numberCar).getValue() > player.getCash()) {
+//            System.out.println("niestety nie masz mieniędzy na to auto. Zacznij wiecej pracować.");
+//        } else {
+            ownedCars.add(searchCarByID(numberCar));
+            System.out.println("kupiłeś" + searchCarByID(numberCar));
+//            player.setCash(player.getCash() - carListDatabase.get(numberCar).getValue());
+//            deletaCArToDatabase(numberCar);
+//            listCarToBuy.clear();
+//            addCarToListToBay();
+//        }
     }
 
+    Car searchCarByID(Integer id) {
+        for (Car car : listCarToBuy) {
+            if (car.getId() == id) {
+                return car;
+            }
+        }
+        return Car.this;
+    }
     public Car(int id, Double value, String model, String brand, Double millage, Color color,
                Segment segment, Demage demage) {
         super(id, value, model, brand, millage, color, segment, demage);
@@ -130,10 +137,24 @@ public class Car extends vehicle {
     }
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Car car = (Car) o;
+        return Objects.equals(player, car.player) && demage == car.demage;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(player, demage);
+    }
+
     static void listMenuBuyCar() {
         System.out.println("Wybrałęś opcję przeglądaj samocgody do kupienia : ");
         System.out.println(" 1 : przeglądaj bazę dostęonych pojazdów");
         System.out.println(" 2 : KUP POJAZD");
         System.out.println(" 0 : powrót do manin menu");
     }
+
 }
